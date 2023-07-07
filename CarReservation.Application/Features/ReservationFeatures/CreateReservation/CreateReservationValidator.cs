@@ -8,6 +8,7 @@ public sealed class CreateReservationValidator : AbstractValidator<CreateReserva
     {
         RuleFor(x => x.StartTime).NotEmpty();
         RuleFor(x => x.EndTime).NotEmpty();
+        RuleFor(x => x.EndTime > x.StartTime);
         RuleFor(x => DateTime.Now - x.StartTime).LessThanOrEqualTo(TimeSpan.FromHours(24));
         RuleFor(x => x.EndTime - x.StartTime).LessThanOrEqualTo(TimeSpan.FromHours(2));
     }

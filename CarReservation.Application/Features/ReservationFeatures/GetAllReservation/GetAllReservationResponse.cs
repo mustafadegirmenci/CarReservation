@@ -1,6 +1,9 @@
-﻿namespace CarReservation.Application.Features.ReservationFeatures.GetAllReservation;
+﻿using CarReservation.Domain.Entities;
 
-public class GetAllReservationResponse
+namespace CarReservation.Application.Features.ReservationFeatures.GetAllReservation;
+
+
+public sealed record GetAllReservationResponse
 {
-    
+    public List<Reservation> Reservations { get; set; }
 }

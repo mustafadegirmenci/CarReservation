@@ -34,6 +34,13 @@ public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
         return Context.Set<T>().FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
     }
 
+    public Task<List<T>> GetMultiple(IEnumerable<Guid> ids, CancellationToken cancellationToken)
+    {
+        return Context.Set<T>()
+            .Where(x => ids.Contains(x.Id))
+            .ToListAsync(cancellationToken);
+    }
+
     public Task<List<T>> GetAll(CancellationToken cancellationToken)
     {
         return Context.Set<T>().ToListAsync(cancellationToken);

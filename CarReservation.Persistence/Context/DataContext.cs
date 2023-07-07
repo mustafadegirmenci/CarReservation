@@ -10,4 +10,5 @@ public class DataContext : DbContext
     }
 
     public DbSet<Car> Cars { get; set; }
+    public DbSet<Reservation> Reservations { get; set; }
 }

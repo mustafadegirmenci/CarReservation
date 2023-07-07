@@ -5,7 +5,7 @@ using MediatR;
 
 namespace CarReservation.Application.Features.ReservationFeatures.CreateReservation;
 
-public class CreateReservationHandler  : IRequestHandler<CreateReservationRequest, CreateReservationResponse>
+public class CreateReservationHandler : IRequestHandler<CreateReservationRequest, CreateReservationResponse>
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IReservationRepository _reservationRepository;
@@ -20,10 +20,12 @@ public class CreateReservationHandler  : IRequestHandler<CreateReservationReques
     
     public async Task<CreateReservationResponse> Handle(CreateReservationRequest request, CancellationToken cancellationToken)
     {
-        var user = _mapper.Map<Reservation>(request);
-        _reservationRepository.Create(user);
+        var reservation = _mapper.Map<Reservation>(request);
+        reservation.BookingTime = DateTime.Now;
+        
+        _reservationRepository.Create(reservation);
         await _unitOfWork.Save(cancellationToken);
 
-        return _mapper.Map<CreateReservationResponse>(user);
+        return _mapper.Map<CreateReservationResponse>(reservation);
     }
 }

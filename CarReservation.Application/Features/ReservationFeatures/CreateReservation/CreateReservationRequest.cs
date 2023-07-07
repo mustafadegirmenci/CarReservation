@@ -3,5 +3,7 @@
 namespace CarReservation.Application.Features.ReservationFeatures.CreateReservation;
 
 public sealed record CreateReservationRequest(
-    DateTime StartTime, 
-    DateTime EndTime) : IRequest<CreateReservationResponse>;
+    Guid CarId,
+    DateTime StartTime,
+    DateTime EndTime
+) : IRequest<CreateReservationResponse>;

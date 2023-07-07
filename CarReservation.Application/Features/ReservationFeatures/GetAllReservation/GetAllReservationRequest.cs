@@ -1,6 +1,5 @@
-﻿namespace CarReservation.Application.Features.ReservationFeatures.GetAllReservation;
+﻿using MediatR;
 
-public class GetAllReservationRequest
-{
-    
-}
+namespace CarReservation.Application.Features.ReservationFeatures.GetAllReservation;
+
+public sealed record GetAllReservationRequest : IRequest<GetAllReservationResponse>;
