@@ -15,6 +15,7 @@ public static class ServiceExtensions
         services.AddDbContext<DataContext>(opt => opt.UseSqlite(connectionString));
 
         services.AddScoped<IUnitOfWork, UnitOfWork>();
-        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<ICarRepository, CarRepository>();
+        services.AddScoped<IReservationRepository, ReservationRepository>();
     }
 }

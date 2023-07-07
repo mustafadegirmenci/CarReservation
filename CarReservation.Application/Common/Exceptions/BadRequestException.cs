@@ -11,5 +11,5 @@ public class BadRequestException : Exception
         Errors = errors;
     }
 
-    public string[] Errors { get; set; }
+    private string[] Errors { get; set; }
 }

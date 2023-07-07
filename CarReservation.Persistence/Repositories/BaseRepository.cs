@@ -9,7 +9,7 @@ public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
 {
     protected readonly DataContext Context;
 
-    public BaseRepository(DataContext context)
+    protected BaseRepository(DataContext context)
     {
         Context = context;
     }
@@ -26,11 +26,10 @@ public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
 
     public void Delete(T entity)
     {
-        entity.DateCreated = DateTimeOffset.UtcNow;
-        Context.Update(entity);
+        Context.Remove(entity);
     }
 
-    public Task<T> Get(Guid id, CancellationToken cancellationToken)
+    public Task<T?> Get(Guid id, CancellationToken cancellationToken)
     {
         return Context.Set<T>().FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
     }
