@@ -9,9 +9,4 @@ public class ReservationRepository : BaseRepository<Reservation>, IReservationRe
     public ReservationRepository(DataContext context) : base(context)
     {
     }
-    
-    // public Task<Reservation?> GetByMake(string email, CancellationToken cancellationToken)
-    // {
-    //     return Context.Cars.FirstOrDefaultAsync(x => x.Brand == email, cancellationToken);
-    // }
 }

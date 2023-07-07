@@ -25,7 +25,7 @@ public class ReservationController : ControllerBase
     }
 
     [HttpGet]
-    [Route("Available")]
+    [Route("available")]
     public async Task<ActionResult<List<GetAllAvailableReservationResponse>>> GetAvailable(
         [FromQuery]GetAllAvailableReservationRequest request, CancellationToken cancellationToken)
     {
