@@ -20,10 +20,15 @@ public sealed class UpdateCarHandler : IRequestHandler<UpdateCarRequest, UpdateC
     
     public async Task<UpdateCarResponse> Handle(UpdateCarRequest request, CancellationToken cancellationToken)
     {
-        var newCar = _mapper.Map<Car>(request);
-        _carRepository.Update(newCar);
-        await _unitOfWork.Save(cancellationToken);
+        var car = await _carRepository.Get(request.Id, cancellationToken);
+        if (car != null)
+        {        
+            _mapper.Map(request, car);
 
-        return _mapper.Map<UpdateCarResponse>(newCar);
+            _carRepository.Update(car);
+            await _unitOfWork.Save(cancellationToken);
+        }
+            
+        return _mapper.Map<UpdateCarResponse>(car);
     }
 }

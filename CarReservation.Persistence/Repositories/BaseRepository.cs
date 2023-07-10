@@ -7,42 +7,47 @@ namespace CarReservation.Persistence.Repositories;
 
 public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
 {
-    protected readonly DataContext Context;
+    private readonly DataContext _context;
 
     protected BaseRepository(DataContext context)
     {
-        Context = context;
+        _context = context;
     }
     
     public void Create(T entity)
     {
-        Context.Add(entity);
+        _context.Add(entity);
     }
 
     public void Update(T entity)
     {
-        Context.Update(entity);
+        _context.Update(entity);
     }
 
     public void Delete(T entity)
     {
-        Context.Remove(entity);
+        _context.Remove(entity);
     }
 
     public Task<T?> Get(Guid id, CancellationToken cancellationToken)
     {
-        return Context.Set<T>().FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
+        return _context
+            .Set<T>()
+            .FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
     }
 
     public Task<List<T>> GetMultiple(IEnumerable<Guid> ids, CancellationToken cancellationToken)
     {
-        return Context.Set<T>()
+        return _context
+            .Set<T>()
             .Where(x => ids.Contains(x.Id))
             .ToListAsync(cancellationToken);
     }
 
     public Task<List<T>> GetAll(CancellationToken cancellationToken)
     {
-        return Context.Set<T>().ToListAsync(cancellationToken);
+        return _context
+            .Set<T>()
+            .ToListAsync(cancellationToken);
     }
 }

@@ -31,7 +31,7 @@ public class CarController : ControllerBase
     {
         var response = await _mediator.Send(request, cancellationToken);
         return Ok(response);
-    }    
+    }
     
     [HttpPut]
     public async Task<ActionResult<CreateCarResponse>> Update(UpdateCarRequest request,
@@ -39,7 +39,7 @@ public class CarController : ControllerBase
     {
         var response = await _mediator.Send(request, cancellationToken);
         return Ok(response);
-    }    
+    }
     
     [HttpDelete]
     public async Task<ActionResult<CreateCarResponse>> Delete(DeleteCarRequest request,
